@@ -14,9 +14,18 @@
 const url = "https://yesno.wtf/api";
 const imgArticle = document.getElementById("img-article");
 const ansText = document.getElementById("answer-text");
+const thinking = document.getElementById("thinking");
+
+function showThinking() {
+  thinking.classList.remove("hide");
+}
+
+function hideThinking() {
+  thinking.classList.add("hide");
+}
 function decide(event) {
   event.preventDefault();
-
+  showThinking();
   fetch(url, {
     method: "GET",
     headers: {
@@ -24,6 +33,7 @@ function decide(event) {
     },
   }).then(async (response) => {
     const result = await response.json();
+    hideThinking();
     if (result) {
       const img = document.createElement("img");
       img.setAttribute("src", result.image);
